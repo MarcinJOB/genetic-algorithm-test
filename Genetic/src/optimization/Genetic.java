@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 public class Genetic {
 
-	// operator genetyczny selekcji
+	// selection genetic operator - selects persons to survive in new population with probability based on their score
 	
 	public static void Selection(Population pop) {
 		double[] scoreSum;			
 		Population tempPop = new Population();			
 		scoreSum = new double[Input.getNumberOfPersons()];
 			
-		// wyznaczenie sumy wyników na potrzeby selekcji - prawdopodobieñstwo skumulowane
+		// cumulated probability for selection
 		
 		for (int i = 0; i < Input.getNumberOfPersons(); i++) {
 			if (i==0) {
@@ -22,28 +22,29 @@ public class Genetic {
 			}
 		}
 		
-		//selekcja - losowanie osobników, które przetrwa³y i zapisanie do roboczej populacji
+		//selection - drawing persons based on cumulated probability and random number
 		
 		for (int i = 0; i < Input.getNumberOfPersons(); i++) {
 			double randomSelector = random() * scoreSum[Input.getNumberOfPersons()-1];
 			int index = 0;
 			do {
 				if (randomSelector < scoreSum[index]) {
-					tempPop.setPerson(pop.getPerson(index), i);
+					tempPop.getPerson(i).copyPersonFrom(pop.getPerson(index));
 				} else {
 					index++;
 				}
 			} while (randomSelector > scoreSum[index]);
 		}
 		
-		// przepisanie referencji z roboczej populacji na g³ówn¹
+		// rewriting temporary population 
 		
 		tempPop.setAge(pop.getAge());
-		tempPop.setBestPerson(pop.getBestPerson());
+		tempPop.getBestPerson().copyPersonFrom(pop.getBestPerson());
+//		tempPop.setBestPerson(pop.getBestPerson());
 		pop = tempPop;
 	}
 	
-	// operator genetyczny krzy¿owania
+	// crossing genetic operator - crossing binary code between two persons
 	
 	public static void Crossing(Population pop) {
 		double random;
@@ -54,7 +55,7 @@ public class Genetic {
 		ArrayList<Integer> chosen = new ArrayList<>();
 		ArrayList<String> binaryChain = new ArrayList<>();
 		
-		// losowanie osobników do krzy¿owania i zapisanie ich indeksów oraz ³añcuchów kodów binarnych
+		// draw persons for crossing and save their indexes and binary chains
 		
 		for (int i = 0; i < Input.getNumberOfPersons(); i++) {
 			random = random();		
@@ -67,7 +68,7 @@ public class Genetic {
 				tempChain = "";
 			}
 		}
-		// jeœli liczba wylosowanych osobników jest nieparzysta - dobiera jako dawcê najlepszego
+		// if number of drawn persons is odd - takes the binary chain of best person as donor for the last crossing
 		
 		if (chosen.size()%2 != 0) {
 			for (int v = 0; v < Input.getNumberOfVariables(); v++) {
@@ -75,7 +76,7 @@ public class Genetic {
 			}
 			binaryChain.add(tempChain);
 		}
-		// wykonanie krzy¿owania - zamiana czêœci kodu miêdzy ³añcuchami binarnymi dwóch kolejnych osób
+		// do the crossing with random sections of binary chains of two following persons
 
 		for (int i = 0; i < binaryChain.size(); i += 2) {
 			random2 = (int) floor(random() * binaryChain.get(i).length());
@@ -102,13 +103,13 @@ public class Genetic {
 		}
 	}
 	
-	// operator mutacji	
+	// mutation genetic operator - mutates random bin values in binary chains
 	
 	public static void Mutation(Population pop) {
 		boolean isMutated;
 		char[] binChar = new char[Input.getNumberOfBits()];
 		
-		// próba mutacji dla ka¿dej binarnej wartoœci ka¿dej zmiennej, ka¿dego osobnika w populacji
+		// draw random test for mutation probability
 		
 		for (int personIndex = 0; personIndex < Input.getNumberOfPersons(); personIndex++) {
 			isMutated = false;
@@ -116,14 +117,14 @@ public class Genetic {
 				for (int binIndex = 0; binIndex < Input.getNumberOfBits(); binIndex++) {
 					if (random() < Input.getMutationProbability()) {
 						isMutated = true;
-						// mutacja pojedyñczej wartoœci binarnej o wskazanym indeksie i zapis nowej binarnej zmiennej
+						// mutation of single bit for positive draw test result
 						binChar = pop.getPerson(personIndex).getBinaryVariable(varIndex).toCharArray();
 						binChar[binIndex] = (binChar[binIndex] == '0') ? '1': '0';
 						pop.getPerson(personIndex).setBinaryVariable(String.valueOf(binChar), varIndex);
 					}
 				}
 			}
-			// zerowanie wyniku i wieku jeœli mutacja nast¹pi³a w dowolnym z binów osobnika
+			
 			if (isMutated) {
 				pop.getPerson(personIndex).setScore(-1);
 				pop.getPerson(personIndex).setAgeToZero();

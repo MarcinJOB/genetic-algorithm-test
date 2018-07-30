@@ -2,12 +2,12 @@ package optimization;
 
 public class Population {
 
-	// deklaracja zmiennych obiektu
+	// instance variables
 	private int age;
 	private Person[] person;
 	private Person bestPerson;
 	
-	// konstruktor populacji o liczbie osobników podanej w argumencie, z dodatkowym osobnikiem najlepszym
+	// no-argument constructor - creates defined number of persons and best person
 	public Population() {
 		person = new Person[Input.getNumberOfPersons()];
 		bestPerson = new Person();
@@ -16,11 +16,11 @@ public class Population {
 		for (int i=0; i < Input.getNumberOfPersons(); i++) {
 			person[i] = new Person();
 		}
-
 	}
-	// obliczanie funkcji celu dla wszystkich osobników oraz wy³onienie najlepszego osobnika z grupy
+	
+	// calculation of goal function score for all persons and saving the best person
 	public void calculateScores() {	
-		int bestIndex = 0;		// indeks najlepszego osobnika
+		int bestIndex = 0;		// temporary index of the best person
 		bestPerson.setAgeUp();
 		
 		for (int i=0; i < Input.getNumberOfPersons(); i++) {
@@ -32,7 +32,8 @@ public class Population {
 			person[i].setAgeUp();
 		}
 		if (person[bestIndex].getScore() > bestPerson.getScore()) {
-			this.setBestPerson(person[bestIndex]);
+			this.getBestPerson().copyPersonFrom(person[bestIndex]);
+//			this.setBestPerson(person[bestIndex]);
 		}
 		this.setPopulationAgeUp();
 	}
@@ -48,21 +49,21 @@ public class Population {
 	public void setPopulationAgeUp() {
 		this.age++;
 	}
+//	setPerson method is probably no longer needed - person.copyPersonFrom method is used
 	
-	
-	// w celu skopiowania osobnika u¿ywaæ nazwa_os.copyPersonFrom(nazwa_os2)
-	public void setPerson(Person person,int indexOfPerson) {
-		this.person[indexOfPerson] = person;
-	}
+//	public void setPerson(Person person,int indexOfPerson) {
+//		this.person[indexOfPerson].copyPersonFrom(person);
+//	}
 	
 	public Person getPerson(int indexOfPerson) {
 		return this.person[indexOfPerson];
 	}
 	
+// as above - setBestPerson method probably no longer needed - person.copyPersonFrom method is used directly
 	
-	public void setBestPerson(Person person) {
-		this.bestPerson.copyPersonFrom(person);
-	}
+//	public void setBestPerson(Person person) {
+//		this.bestPerson.copyPersonFrom(person);
+//	}
 	
 	
 	public Person getBestPerson() {

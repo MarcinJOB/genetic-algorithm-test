@@ -2,22 +2,20 @@ package optimization;
 
 public class Person {
 	
-
-	// zmienne instancyjne
+	// instance variables
 	private double[] variable;
 	private String[] binaryVariable;
-	double score;
-	int age;
+	private double score;
+	private int age;
 	
-	// konstruktor bez argumentów, tworzy osobnika o danej liczbie zmiennych i losuje dla niego wartoœci tych zmiennych
+	// no-argument constructor - creates person with random values for all variables
 	public Person() {
 		score = -1;
 		age = 0;
 		this.setRandomVariables();
 	}
 
-
-	// ustawienie losowej wartoœci binarnej i przeliczenie rzeczywistej dla tablicy wartoœci
+	// setting random binary value of variables and calculating decimal values
 	public void setRandomVariables() {
 		variable = new double[Input.getNumberOfVariables()];
 		binaryVariable = new String[Input.getNumberOfVariables()];
@@ -32,7 +30,7 @@ public class Person {
 		}
 	}
 
-	// jedyny sposób zmiany wartoœci zmiennej - przez wartoœæ binarn¹, na potrzeby modyfikatorów genetycznych
+	// the only way to change value of variable - through binary value (used by genetic modificators)
 	
 	public void setBinaryVariable(String binaryVariable, int indexOfVariable) {
 		this.binaryVariable[indexOfVariable] = binaryVariable;
@@ -40,17 +38,17 @@ public class Person {
 		this.variable[indexOfVariable] = decimal * Input.getStepValueOfVar(indexOfVariable) 
 				+ Input.getMinValueOfVar(indexOfVariable);
 	}
-	// kopiowanie danych osobnika na potrzeby najlepszego osobnika
-	public void copyPersonFrom(Person PersonDoner) {
-		this.score = PersonDoner.score;
-		this.age = PersonDoner.age;
+	
+	// copy person details for saving the best person
+	public void copyPersonFrom(Person PersonDonor) {
+		this.score = PersonDonor.score;
+		this.age = PersonDonor.age;
 		for (int i = 0; i < Input.getNumberOfVariables(); i++) {
-		this.setBinaryVariable(PersonDoner.getBinaryVariable(i), i);
+		this.setBinaryVariable(PersonDonor.getBinaryVariable(i), i);
 		}
 	}
 
-	
-	// pozosta³e gettery i settery
+	// other setters & getters
 	
 	
 	public double getVariableValue(int indexOfVariable) {
