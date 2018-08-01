@@ -51,7 +51,7 @@ public class Person {
 	// other setters & getters
 	
 	
-	public double getVariableValue(int indexOfVariable) {
+	public double getVariable(int indexOfVariable) {
 		return this.variable[indexOfVariable];
 	}
 	

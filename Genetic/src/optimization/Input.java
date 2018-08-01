@@ -4,11 +4,12 @@ import java.io.*;
 import java.util.*;
 
 public class Input {
-	// zmienne statyczne
-		/* precyzja obliczeñ wyra¿ona w liczbie bitów zmiennej binarnej, ogólna dla wszystkich zmiennych.
-		Mo¿liwa modyfikacja z indywidualnym doborem dok³adnoœci dla ka¿dej zmiennej*/
-		
-		// sta³e dotycz¹ce zmiennych w klasie Person oraz obliczeñ w klasie Goal
+	// declaration of static variables
+	// precision of calculations is expressed as a number of bits for binary variables, which is the same for all variables
+	// it is possible to set individual number of bits for every variable, but it is not important in this project
+	
+	// global constants for precision of calculations
+		private static int numberOfPersons;
 		private static int numberOfBits;
 		private static int numberOfCombinations;
 		private static int numberOfVariables;
@@ -16,19 +17,16 @@ public class Input {
 		private static double[] rangeMin;
 		private static double[] step;
 		
-		// sta³e dotycz¹ce g³ównie klasy Population
-		private static int numberOfPersons;
-		
-		// sta³e dotycz¹ce ograniczeñ w obliczeniach
+	// constants concerning boundary limits of calculation loop
 		private static int generationsMin;
 		private static int generationsMax;
 		private static int bestPersonMaxAge;
 		
-		// sta³e dotycz¹ce prawdopodobieñstwa w operatorach genetycznych
+	// constants concerning probability in genetic operators
 		private static double crossingProbability;
 		private static double mutationProbability;
 		
-		// metoda zczytuj¹ca wszystkie sta³e z pliku o podanej œcie¿ce
+	// method to read input file from given file path 
 		public static void readInput(String filePath) {
 			ArrayList<String> inData = new ArrayList<>();
 			try (
@@ -71,6 +69,7 @@ public class Input {
 			
 		}
 		
+	// method to generate report with results of optimization to the output file
 		public static void reportStatus(String filePath, Population pop) {
 			try ( FileWriter file = new FileWriter(filePath);
 				BufferedWriter buffwr = new BufferedWriter(file)){
@@ -83,7 +82,7 @@ public class Input {
 				buffwr.write(Double.toString(pop.getBestPerson().getScore()).replace('.', ','));
 			for (int j = 0; j < numberOfVariables; j++) {
 				buffwr.newLine();
-				buffwr.write(Double.toString(pop.getBestPerson().getVariableValue(j)).replace('.', ','));
+				buffwr.write(Double.toString(pop.getBestPerson().getVariable(j)).replace('.', ','));
 			}
 				buffwr.close();
 			} catch (IOException e) {
@@ -92,7 +91,7 @@ public class Input {
 		}
 		
 			
-		
+	//getters for constants
 		public static int getNumberOfPersons() {
 			return numberOfPersons;
 		}

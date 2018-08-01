@@ -54,7 +54,7 @@ public class Optimizer {
 		// generate output file with results of genetic optimization
 		System.out.println("Genetic optimization is finished.\nResulted values of variables are:");
 		for (int i = 0; i < Input.getNumberOfVariables(); i++) {
-			System.out.println("Variable " + i + ": " + population.getBestPerson().getVariableValue(i));
+			System.out.println("Variable " + i + ": " + population.getBestPerson().getVariable(i));
 		}
 		System.out.println("Score is: " + population.getBestPerson().getScore());
 		System.out.println("Time of calculation in milisec was: " + timeDuration);
