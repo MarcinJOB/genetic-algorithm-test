@@ -7,7 +7,7 @@ public class Population {
 	private Person[] person;
 	private Person bestPerson;
 	
-	Goal goal = new Goal();
+	Goal goal = new DefaultGoal();
 	
 	// no-argument constructor - creates defined number of persons and best person
 	public Population() {
