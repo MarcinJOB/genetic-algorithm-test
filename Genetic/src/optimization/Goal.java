@@ -6,7 +6,7 @@ import static java.lang.Math.*;
 // This is the class where You put Your goal function calculations.
 // Remember that input file has to contain all variables used in this class.
 
-public class Goal {
+public class DefaultGoal implements Goal {
 	
 	public void calculateScore(Person person) {
 		double score1 = function1(person.getVariable(0));
