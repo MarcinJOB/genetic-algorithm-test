@@ -2,7 +2,12 @@ package optimization;
 
 import java.io.IOException;
 
+//ensure this class is managed by spring.
+
 public class Optimizer {
+	
+	//managed by spring
+	Population population = new Population();
 
 	public static void main (String[] args) throws IOException {
 		long timeStart, timeEnd, timeDuration;
@@ -25,9 +30,10 @@ public class Optimizer {
 		}
 				 
 		Input.readInput(pathIn);
+		
+		Optimizer optimizer = new Optimizer();
 
-		Population population = new Population();
-		population.calculateScores();
+		optimizer.population.calculateScores();
 		
 		//perform loop of genetic operators on population and calculation of goal function till boundary limits of population age are met
 		
@@ -36,14 +42,14 @@ public class Optimizer {
 			System.out.println("Calculating generation number " + population.getAge() + ", Best score till now is: " + population.getBestPerson().getScore());
 			}
 			
-			Genetic.Selection(population);
-			Genetic.Crossing(population);
-			Genetic.Mutation(population);
+			Genetic.Selection(optimizer.population);
+			Genetic.Crossing(optimizer.population);
+			Genetic.Mutation(optimizer.population);
 			
-			population.calculateScores();
+			optimizer.population.calculateScores();
 			
-			PopulationNotOld = population.getAge() < Input.getMaxNoGenerations();
-			BestPersonNotOld = population.getBestPerson().getAge() < Input.getBestPersonMaxAge();			
+			PopulationNotOld = optimizer.population.getAge() < Input.getMaxNoGenerations();
+			BestPersonNotOld = optimizer.population.getBestPerson().getAge() < Input.getBestPersonMaxAge();			
 			
 		} while (PopulationNotOld && BestPersonNotOld);
 		
@@ -54,12 +60,12 @@ public class Optimizer {
 		// generate output file with results of genetic optimization
 		System.out.println("Genetic optimization is finished.\nResulted values of variables are:");
 		for (int i = 0; i < Input.getNumberOfVariables(); i++) {
-			System.out.println("Variable " + i + ": " + population.getBestPerson().getVariable(i));
+			System.out.println("Variable " + i + ": " + optimizer.population.getBestPerson().getVariable(i));
 		}
-		System.out.println("Score is: " + population.getBestPerson().getScore());
+		System.out.println("Score is: " + optimizer.population.getBestPerson().getScore());
 		System.out.println("Time of calculation in milisec was: " + timeDuration);
 		
-		Input.reportStatus(pathOut, population);
+		Input.reportStatus(pathOut, optimizer.population);
 
 	
 	}
