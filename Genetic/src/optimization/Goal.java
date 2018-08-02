@@ -8,7 +8,7 @@ import static java.lang.Math.*;
 
 public class Goal {
 	
-	public static void calculateScore(Person person) {
+	public void calculateScore(Person person) {
 		double score1 = function1(person.getVariable(0));
 		double score2 = function2(person.getVariable(1));
 		double score3 = function3(person.getVariable(2));
