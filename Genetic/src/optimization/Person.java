@@ -1,5 +1,6 @@
 package optimization;
 
+//consider implementing Clonable and get replace method copyPersonFrom
 public class Person {
 	
 	// instance variables
