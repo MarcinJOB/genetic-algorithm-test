@@ -7,6 +7,8 @@ public class Population {
 	private Person[] person;
 	private Person bestPerson;
 	
+	Goal goal = new Goal();
+	
 	// no-argument constructor - creates defined number of persons and best person
 	public Population() {
 		person = new Person[Input.getNumberOfPersons()];
@@ -25,7 +27,7 @@ public class Population {
 		
 		for (int i=0; i < Input.getNumberOfPersons(); i++) {
 			if (person[i].getAge() == 0) {
-				Goal.calculateScore(person[i]);
+				goal.calculateScore(person[i]);
 				if (person[i].getScore() > person[bestIndex].getScore())
 					bestIndex = i;
 			}
