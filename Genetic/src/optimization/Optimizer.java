@@ -38,8 +38,8 @@ public class Optimizer {
 		//perform loop of genetic operators on population and calculation of goal function till boundary limits of population age are met
 		
 		do{
-			if (population.getAge() % 10 == 0) {
-			System.out.println("Calculating generation number " + population.getAge() + ", Best score till now is: " + population.getBestPerson().getScore());
+			if (optimizer.population.getAge() % 10 == 0) {
+			System.out.println("Calculating generation number " + optimizer.population.getAge() + ", Best score till now is: " + optimizer.population.getBestPerson().getScore());
 			}
 			
 			Genetic.Selection(optimizer.population);
