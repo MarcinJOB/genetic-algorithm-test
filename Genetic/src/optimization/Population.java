@@ -1,11 +1,16 @@
 package optimization;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import config.*;
+
 public class Population {
 
 	// instance variables
 	private int age;
 	private Person[] person;
 	private Person bestPerson;
+	
+	Goal goal = new DefaultGoal();
 	
 	// no-argument constructor - creates defined number of persons and best person
 	public Population() {
@@ -19,13 +24,19 @@ public class Population {
 	}
 	
 	// calculation of goal function score for all persons and saving the best person
-	public void calculateScores() {	
+	public void calculateScores() {
+		
+	// String injection of class implementing goal interface
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+		Goal goal = (Goal) context.getBean(Goal.class);
+		context.close();
+		
 		int bestIndex = 0;		// temporary index of the best person
 		bestPerson.setAgeUp();
 		
 		for (int i=0; i < Input.getNumberOfPersons(); i++) {
 			if (person[i].getAge() == 0) {
-				Goal.calculateScore(person[i]);
+				goal.calculateScore(person[i]);
 				if (person[i].getScore() > person[bestIndex].getScore())
 					bestIndex = i;
 			}

@@ -29,7 +29,7 @@ public class Person {
 			}
 		}
 	}
-
+	
 	// the only way to change value of variable - through binary value (used by genetic modificators)
 	
 	public void setBinaryVariable(String binaryVariable, int indexOfVariable) {
@@ -77,6 +77,13 @@ public class Person {
 	
 	public void setAgeToZero() {
 		this.age = 0;
+	}
+	
+	// constructor for testing (need to work on simplifying code, so this won't be necessary)
+	public Person(double[] variables) {
+		score = -1;
+		age = 0;
+		this.variable = variables;
 	}
 
 
