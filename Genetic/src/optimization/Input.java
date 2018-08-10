@@ -25,6 +25,37 @@ public class Input {
 	// constants concerning probability in genetic operators
 		private static double crossingProbability;
 		private static double mutationProbability;
+	
+// new method to read input file from only file name - without whole path
+		public static ArrayList<String> readFile(String fileName) {
+			ArrayList<String> input_lines = new ArrayList<>();
+			try (
+					FileReader file = new FileReader(fileName);
+					BufferedReader buff = new BufferedReader(file)){
+				boolean eof = false;
+				while(!eof) {
+					String line = buff.readLine();
+					if(line == null) {
+						eof = true;
+					} else {
+						input_lines.add(line.trim());
+					}
+				}
+				buff.close();
+			} catch (IOException e) {
+				System.out.println("Error -- " + e.toString());
+			} 
+			
+			input_lines.trimToSize();
+			return input_lines;
+		}
+		
+// new method to set constants from input file		
+		public static boolean setConstants(ArrayList<String> readFile) {
+			
+			return true;
+		}
+		
 		
 	// method to read input file from given file path 
 		public static void readInput(String filePath) {
@@ -44,7 +75,7 @@ public class Input {
 				buff.close();
 			} catch (IOException e) {
 				System.out.println("Error -- " + e.toString());
-			}
+			} 
 			
 			inData.trimToSize();
 			
@@ -73,7 +104,7 @@ public class Input {
 		public static void reportStatus(String filePath, Population pop) {
 			try ( FileWriter file = new FileWriter(filePath);
 				BufferedWriter buffwr = new BufferedWriter(file)){
-				buffwr.write("Obliczenia zakoñczone");
+				buffwr.write("Calculations finished");
 				buffwr.newLine();
 				buffwr.write(Integer.toString(pop.getAge()));
 				buffwr.newLine();
