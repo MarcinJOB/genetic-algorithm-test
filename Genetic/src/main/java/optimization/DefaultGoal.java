@@ -1,4 +1,4 @@
-package optimization;
+package main.java.optimization;
 
 import static java.lang.Math.*;
 

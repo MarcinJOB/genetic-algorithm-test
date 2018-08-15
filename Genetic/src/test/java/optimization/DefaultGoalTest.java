@@ -1,10 +1,10 @@
-package test;
+package test.java.optimization;
 
 import org.junit.jupiter.api.Assertions;
-
 import org.junit.jupiter.api.Test;
-
-import optimization.*;
+import main.java.optimization.DefaultGoal;
+import main.java.optimization.Goal;
+import main.java.optimization.Person;
 
 class DefaultGoalTest {
 	

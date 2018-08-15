@@ -1,4 +1,4 @@
-package optimization;
+package main.java.optimization;
 
 import java.io.*;
 import java.util.*;

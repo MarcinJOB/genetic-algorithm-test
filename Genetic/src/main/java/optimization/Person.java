@@ -1,4 +1,4 @@
-package optimization;
+package main.java.optimization;
 
 public class Person {
 	
