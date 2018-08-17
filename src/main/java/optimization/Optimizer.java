@@ -5,6 +5,7 @@ import java.io.IOException;
 //ensure this class is managed by spring.
 // DONE - Goal function is managed by Spring inside Population class
 
+//@PropertySource("classpath:input.properties")
 public class Optimizer {
 	
 	//managed by spring
@@ -39,6 +40,7 @@ public class Optimizer {
 			
 			optimizer.population.calculateScores();
 			
+
 			PopulationNotOld = optimizer.population.getAge() < Input.getMaxNoGenerations();
 			BestPersonNotOld = optimizer.population.getBestPerson().getAge() < Input.getBestPersonMaxAge();			
 			

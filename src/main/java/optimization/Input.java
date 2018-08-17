@@ -3,9 +3,6 @@ package optimization;
 import java.io.*;
 import java.util.*;
 
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
-
 //@Component
 //@PropertySource("classpath:input.properties")
 public class Input {
