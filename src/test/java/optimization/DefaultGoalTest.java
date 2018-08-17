@@ -1,15 +1,11 @@
-package test.java.optimization;
+package optimization;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import main.java.optimization.DefaultGoal;
-import main.java.optimization.Goal;
-import main.java.optimization.Person;
 
 class DefaultGoalTest {
-	
-	Goal goal = new DefaultGoal();
 
+	Goal goal = new DefaultGoal();
 	@Test
 	void shouldReturn250() {
 		double[] variables = {0,0,0};

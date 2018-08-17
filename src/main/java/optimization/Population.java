@@ -1,8 +1,7 @@
-package main.java.optimization;
+package optimization;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import config.*;
-import main.java.config.Config;
+import config.Config;
 
 public class Population {
 

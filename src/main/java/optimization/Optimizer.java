@@ -1,4 +1,4 @@
-package main.java.optimization;
+package optimization;
 
 import java.io.IOException;
 

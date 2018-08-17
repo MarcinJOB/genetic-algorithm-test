@@ -53,3 +53,10 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
+# Maven
+log/
+target/
+
+# Old Application files, will be added after corrections
+/OLD_APP/

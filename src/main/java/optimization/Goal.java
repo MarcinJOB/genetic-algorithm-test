@@ -1,4 +1,4 @@
-package main.java.optimization;
+package optimization;
 
 public interface Goal{
   public void calculateScore(Person person);
