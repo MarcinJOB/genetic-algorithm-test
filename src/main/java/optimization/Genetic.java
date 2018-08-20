@@ -12,7 +12,7 @@ public class Genetic {
 		Population tempPop = new Population();			
 		scoreSum = new double[Input.getNumberOfPersons()];
 			
-		// cumulated probability for selection
+		// cumulative probability for selection
 		
 		for (int i = 0; i < Input.getNumberOfPersons(); i++) {
 			if (i==0) {
@@ -22,7 +22,7 @@ public class Genetic {
 			}
 		}
 		
-		//selection - drawing persons based on cumulated probability and random number
+		//selection - drawing persons based on cumulative probability and random number
 		
 		for (int i = 0; i < Input.getNumberOfPersons(); i++) {
 			double randomSelector = random() * scoreSum[Input.getNumberOfPersons()-1];

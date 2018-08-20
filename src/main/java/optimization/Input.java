@@ -31,7 +31,7 @@ public class Input {
 // new method to read input file from only file name - without whole path
 		public static String[] readFile(String fileName) {
 			ArrayList<String> inputLines = new ArrayList<>();
-			try (BufferedReader buff = new BufferedReader(new FileReader(fileName)))
+			try (BufferedReader buff = new BufferedReader(new InputStreamReader(Input.class.getResourceAsStream(fileName))))
 			{	
 				String line = null;
 				while((line = buff.readLine()) != null) {
